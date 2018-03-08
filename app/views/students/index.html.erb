@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Students</h1>
+
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Major</th>
+      <th>Courses</th>
+      <th colspan="2">Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @students.each_with_index do |student,index| %>
+      <tr>
+        <td><%= index+1 %></td>
+        <td><%= link_to student.name, student %></td>
+        <td><%= student.email %></td>
+        <td><%= student.major %></td>
+        <td>
+            <% if student.courses.pluck(:name).empty? %>
+                N/A
+            <% else %>
+              <%= student.courses.pluck(:name).join(", ") %>
+            <% end %>
+        </td>
+        <td><%= link_to 'Edit', edit_student_path(student) %></td>
+        <td><%= link_to 'Destroy', student, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Student', new_student_path %>

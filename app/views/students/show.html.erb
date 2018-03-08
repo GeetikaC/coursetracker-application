@@ -1,0 +1,50 @@
+<% if notice %>
+  <script type="text/javascript">
+      $.growl.notice({ message: "Successfully added the student!" });
+  </script>
+  <div class="alert alert-success" id="notice">
+    <%= notice %>
+  </div>
+<% end %>
+
+<p>
+  <strong>Name:</strong>
+  <%= @student.name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @student.email %>
+</p>
+
+<p>
+  <strong>Major:</strong>
+  <%= @student.major %>
+</p>
+
+<p>
+  <strong>Courses:</strong>
+  <% if @student.courses.empty? %>
+    <p>Not enrolled in any courses</p>
+  <% else %>
+  <table>
+  <thead>
+    <tr>
+      <th>Course Name</th>
+      <th>Instructor</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @student.courses.each do |course| %>
+    <tr>
+      <td><%= course.name %></td>
+      <td><%= link_to course.instructor.name, course.instructor %></td>
+    </tr>
+    <% end %>
+    </tbody>
+  </table>
+  <% end %>
+</p>
+
+<%= link_to 'Edit', edit_student_path(@student) %> |
+<%= link_to 'Back', students_path %>

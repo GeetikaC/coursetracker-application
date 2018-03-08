@@ -1,0 +1,8 @@
+<% if @course.errors.any? %>
+  $('#error').html("<%= escape_javascript render 'errors' %>");
+<% else %>
+  $('#error').hide();
+  $('#newCourse').modal('hide');
+  $.growl.notice({ message: "Successfully added the Course!" });
+  $('#courseList').prepend("<%= escape_javascript render 'course' %>");
+<% end %>

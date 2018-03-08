@@ -1,0 +1,39 @@
+<% if notice %>
+  <script type="text/javascript">
+      $.growl.notice({ message: "Successfully added the instructor!" });
+  </script>
+  <div class="alert alert-success" id="notice">
+    <%= notice %>
+  </div>
+<% end %>
+
+<p>
+  <strong>Name:</strong>
+  <%= @instructor.name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @instructor.email %>
+</p>
+
+<p>
+  <strong>Bio:</strong>
+  <%= @instructor.bio %>
+</p>
+
+<p>
+  <strong>Courses:</strong>
+  <% if @instructor.courses.empty? %>
+  	No courses found.
+  <% else %>
+  	<% @instructor.courses.pluck(:name).each do |course| %>
+  		<li>Course: <%= course %><br/>
+  			Students enrolled: <%= Registration.where("course_id=?", @instructor.course_ids).length %>
+  		</li>
+  	<% end %>
+  <% end %>
+</p>
+
+<%= link_to 'Edit', edit_instructor_path(@instructor) %> |
+<%= link_to 'Back', instructors_path %>

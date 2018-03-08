@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Coursetracker</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <script src="/javascripts/jquery.growl.js"></script>
+
+    <link rel="stylesheet" href="/stylesheets/jquery.growl.css" />
+
+  </head>
+
+  <body>
+    <div class="container">
+      <%= render '/layouts/nav' %><br/>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/">Home</a></li>
+          <%= link_to controller.controller_name.capitalize, "/#{controller.controller_name}", class: "breadcrumb-item" %>
+          <% if controller.action_name == "show" %>
+            <% case controller.controller_name %>
+            <% when "students" %>
+              <li class="breadcrumb-item active" aria-current="page"><%= @student.name %></li>
+            <% when "instructors" %>
+              <li class="breadcrumb-item active" aria-current="page"><%= @instructor.name %></li>
+            <% when "courses" %>
+              <li class="breadcrumb-item active" aria-current="page"><%= @course.name %></li>
+            <% end %>
+          <% else %>
+            <li class="breadcrumb-item active" aria-current="page"><%= controller.action_name.capitalize %></li>
+          <% end %>
+        </ol>
+      </nav>
+      <%= yield %>
+    </div>
+  </body>
+</html>

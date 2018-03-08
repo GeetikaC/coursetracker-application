@@ -1,0 +1,35 @@
+COURSE INDEX PAGE:
+
+
+<h1>Courses</h1>
+
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Instructor ID</th>
+      <th>Instructor Name</th>
+      <th>Student Count</th>
+      <th colspan="3">Action</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @courses.each_with_index do |course,index| %>
+      <tr>
+        <td><%= index+1 %></td>
+        <td><%= link_to course.name, course %></td>
+        <td><%= course.description %></td>
+        <td><%= course.instructor_id %></td>
+        <td><%= link_to course.instructor.name, course.instructor%></td>
+        <td><%= course.students.count %></td>
+        <td><%= link_to 'Edit', edit_course_path(course) %></td>
+        <td><%= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

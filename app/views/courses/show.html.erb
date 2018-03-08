@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @course.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @course.description %>
+</p>
+
+<p>
+  <strong>Instructor:</strong><br/>
+  Instructor ID:<%= @course.instructor_id %><br/>
+  Instructor Name:<%= @course.instructor.name %>
+</p>
+
+<p>
+  <strong>Students Enrolled:</strong><br/>
+  Total: <%= @course.students.count %><br/>
+  <% if @course.students.empty? %>
+  	<p>No students enrolled</p>
+  <% else %>
+	  Names: 
+	  <ol>
+	  <% @course.students.each do |student| %>
+	  	<li>
+	  		<%= link_to student.name, student %>
+	  	</li>
+	  <% end %>
+	  </ol>
+  <% end %>
+</p>
+
+<%= link_to 'Edit', edit_course_path(@course) %> |
+<%= link_to 'Back', courses_path %>

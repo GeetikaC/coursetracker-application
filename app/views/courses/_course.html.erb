@@ -1,0 +1,15 @@
+<div class="col-md-3">
+  <div class="card">
+    <img class="card-img-top" src="https://placeimg.com/286/180/tech?t=1519714651499" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title"><%= @course.name %></h5>
+      <p class="card-text"><%= @course.description.truncate(200) %></p>
+      <%= link_to "Enroll", @course, class: "btn btn-primary" %>
+    </div>
+    <div class="card-footer">
+      <small class="text-muted">
+        <%= @course.students.count %> students have already enrolled
+      </small>
+    </div>
+  </div>
+</div>
